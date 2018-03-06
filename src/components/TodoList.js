@@ -18,10 +18,10 @@ class TodoList extends Component {
   addTodo = (event) => {
     event.preventDefault();
     const updateTodo = this.state.todos;
-    updateTodo.unshift(this.state.newTodo);
+    updateTodo.push(this.state.newTodo);
     this.setState({
-      newTodo: '',
-      todos: updateTodo
+      todos: updateTodo,
+      newTodo: ''
     });
   }
 
@@ -34,18 +34,12 @@ class TodoList extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.addTodo}>
-          <input id="test" 
-            onChange={this.handleTodoInput}
-            placeholder="Add a new todo"
-            value={this.state.newTodo}
-          />
-        </form>
-        <div>
           {this.state.todos.map((todo, i) => 
-            <Todo key={i} index={i} todo={todo} remove={this.removeTodo.bind(this)} />
-          )}
-        </div>
+            <Todo key={i} index={i} todo={todo} remove={this.removeTodo.bind(this)} />)}
+        <form onSubmit={this.addTodo}>
+          <input id="test" type="text" onChange={this.handleTodoInput}
+            placeholder="Add a new todo" value={this.state.newTodo} />
+        </form>
       </div>
     );
   }
